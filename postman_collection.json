@@ -42,6 +42,21 @@
 				},
 				{
 					"name": "Project Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29abaf9b-9cf2-49fe-bde7-1b026458e134",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"projectId\", jsonData.id);",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -52,13 +67,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Two tests Project\",\n\t\"description\": \"Project description\",\n\t\"test_ids\": [1,2]\n}"
+							"raw": "{\n\t\"name\": \"new Project\",\n\t\"description\": \"Project description\",\n\t\"test_ids\": [1,2]\n}"
 						},
 						"url": {
-							"raw": "{{server}}/api/projects",
+							"raw": "http://localhost:2300/api/projects",
+							"protocol": "http",
 							"host": [
-								"{{server}}"
+								"localhost"
 							],
+							"port": "2300",
 							"path": [
 								"api",
 								"projects"
@@ -108,10 +125,12 @@
 							"raw": "{\n\t\"action\": \"start\"\n}"
 						},
 						"url": {
-							"raw": "{{server}}/api/projects/{{projectId}}/start_project",
+							"raw": "http://localhost:2300/api/projects/{{projectId}}/start_project",
+							"protocol": "http",
 							"host": [
-								"{{server}}"
+								"localhost"
 							],
+							"port": "2300",
 							"path": [
 								"api",
 								"projects",
@@ -123,7 +142,7 @@
 					},
 					"response": [
 						{
-							"id": "7b8a6dc0-6dcc-40a9-8067-8e0b3f1248be",
+							"id": "f85d3711-593f-40a6-a549-0c16c00c7b25",
 							"name": "Start Project Example",
 							"originalRequest": {
 								"header": [],
@@ -142,7 +161,7 @@
 							"body": "{\n\t\"projectRunID\": \"1\",\n\t\"status\": \"starting\"\n}"
 						},
 						{
-							"id": "1fe57225-114e-4346-b43d-404a1e836465",
+							"id": "e7b6dc5c-28c8-4170-aa5e-2493e720a4a7",
 							"name": "Start Project Example",
 							"originalRequest": {
 								"header": [],
@@ -187,10 +206,12 @@
 							"raw": "{\n\t\"action\": \"pause\"\n}"
 						},
 						"url": {
-							"raw": "{{server}}/api/projects/{{projectId}}/run_project",
+							"raw": "http://localhost:2300/api/projects/{{projectId}}/run_project",
+							"protocol": "http",
 							"host": [
-								"{{server}}"
+								"localhost"
 							],
+							"port": "2300",
 							"path": [
 								"api",
 								"projects",
@@ -202,7 +223,7 @@
 					},
 					"response": [
 						{
-							"id": "4dd3522b-647c-430c-b770-9c2a6a21d55b",
+							"id": "57d4d4c5-6a7f-4f3a-ba59-b6fb8581a0ad",
 							"name": "Pause Project Example",
 							"originalRequest": {
 								"method": "POST",
@@ -227,10 +248,12 @@
 									"raw": "{\n\t\"action\": \"pause\"\n}"
 								},
 								"url": {
-									"raw": "{{server}}/api/projects/{{projectId}}/run_project",
+									"raw": "http://localhost:2300/api/projects/{{projectId}}/run_project",
+									"protocol": "http",
 									"host": [
-										"{{server}}"
+										"localhost"
 									],
+									"port": "2300",
 									"path": [
 										"api",
 										"projects",
@@ -275,10 +298,12 @@
 							"raw": "{\n\t\"action\": \"stop\"\n}"
 						},
 						"url": {
-							"raw": "{{server}}/api/projects/{{projectId}}/stop_project",
+							"raw": "http://localhost:2300/api/projects/{{projectId}}/stop_project",
+							"protocol": "http",
 							"host": [
-								"{{server}}"
+								"localhost"
 							],
+							"port": "2300",
 							"path": [
 								"api",
 								"projects",
@@ -290,7 +315,7 @@
 					},
 					"response": [
 						{
-							"id": "b6e684b7-5027-493d-89b0-3855ea986905",
+							"id": "c4af5ee3-137b-47c8-b8d9-feca05c14026",
 							"name": "Stop Project Example",
 							"originalRequest": {
 								"header": [],
@@ -335,10 +360,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{server}}/api/project_run/{{projectRunId}}",
+							"raw": "http://localhost:2300/api/project_run/{{projectRunId}}",
+							"protocol": "http",
 							"host": [
-								"{{server}}"
+								"localhost"
 							],
+							"port": "2300",
 							"path": [
 								"api",
 								"project_run",
@@ -349,7 +376,7 @@
 					},
 					"response": [
 						{
-							"id": "8b356d9b-9de3-4ce0-903a-60ed5679a5bd",
+							"id": "49072ab5-642d-42ff-9e7e-3e131aabd9a6",
 							"name": "Stop Project Example",
 							"originalRequest": {
 								"header": [],
@@ -390,12 +417,12 @@
 							"raw": "{\n\t\"action\": \"start\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:2302/tests",
+							"raw": "http://localhost:2301/tests",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "2302",
+							"port": "2301",
 							"path": [
 								"tests"
 							]
@@ -404,7 +431,7 @@
 					},
 					"response": [
 						{
-							"id": "6cdeafb4-4dc5-454c-bc83-e602eed469f6",
+							"id": "a1ffdbe4-81af-40ad-8b47-b32495a4a9c9",
 							"name": "Test list",
 							"originalRequest": {
 								"method": "GET",
@@ -508,15 +535,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Test 4\",\n\t\"description\": \"\",\n\t\"type\": \"httpbandwidth\"\n}"
+							"raw": "{\n\t\"name\": \"New test\",\n\t\"description\": \"Test description\",\n\t\"type\": \"httpbandwidth\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:2302/tests",
+							"raw": "http://localhost:2301/tests",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "2302",
+							"port": "2301",
 							"path": [
 								"tests"
 							]
@@ -525,7 +552,7 @@
 					},
 					"response": [
 						{
-							"id": "f538f791-fdc8-4525-b04e-c0e8f4734ffd",
+							"id": "0dca17e2-c6a8-424f-95f8-ca5b0c0d2823",
 							"name": "Test Create",
 							"originalRequest": {
 								"method": "POST",

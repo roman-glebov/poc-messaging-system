@@ -101,7 +101,7 @@ Inside `fake_test_runner` start the server:
 bundle exec hanami server -p 2301
 ```
 
-Import file `postman_collection.json` to you Postman
+Import file `postman_collection.json` to you Postman.
 
 First, you need to add some tests:
 
