@@ -1,0 +1,9 @@
+[submodule "fake_cf_api"]
+	path = fake_cf_api
+	url = https://github.com/roman-glebov/fake_cf_api.git
+[submodule "fake_project_runner"]
+	path = fake_project_runner
+	url = https://github.com/roman-glebov/fake_project_runner.git
+[submodule "fake_test_runner"]
+	path = fake_test_runner
+	url = https://github.com/roman-glebov/fake_test_runner.git
