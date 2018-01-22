@@ -1,0 +1,623 @@
+{
+	"info": {
+		"name": "[PoC] Messaging System",
+		"_postman_id": "c3309f93-a493-85e5-cfad-15aa00911b6b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cyberflood API",
+			"description": "",
+			"item": [
+				{
+					"name": "Project list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"start\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2300/api/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2300",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Project Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Two tests Project\",\n\t\"description\": \"Project description\",\n\t\"test_ids\": [1,2]\n}"
+						},
+						"url": {
+							"raw": "{{server}}/api/projects",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Start Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6596581e-0647-4c43-942a-a42f4900e30f",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"projectRunId\", jsonData.projectRunId);",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 201;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-mock-response-code",
+								"value": "201",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{x-api-key}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"start\"\n}"
+						},
+						"url": {
+							"raw": "{{server}}/api/projects/{{projectId}}/start_project",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{projectId}}",
+								"start_project"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "7b8a6dc0-6dcc-40a9-8067-8e0b3f1248be",
+							"name": "Start Project Example",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"_postman_previewtype": "parsed",
+							"header": [],
+							"cookie": [],
+							"responseTime": 0,
+							"body": "{\n\t\"projectRunID\": \"1\",\n\t\"status\": \"starting\"\n}"
+						},
+						{
+							"id": "1fe57225-114e-4346-b43d-404a1e836465",
+							"name": "Start Project Example",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"_postman_previewtype": "parsed",
+							"header": [],
+							"cookie": [],
+							"responseTime": 0,
+							"body": "{\n\t\"projectID\": {{projectId}},\n\t\"projectRunId\": {{projectRunId}},\n\t\"status\": \"starting\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Pause Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-mock-response-code",
+								"value": "202",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{x-api-key}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"pause\"\n}"
+						},
+						"url": {
+							"raw": "{{server}}/api/projects/{{projectId}}/run_project",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{projectId}}",
+								"run_project"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "4dd3522b-647c-430c-b770-9c2a6a21d55b",
+							"name": "Pause Project Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "x-mock-response-code",
+										"value": "202",
+										"disabled": true
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"action\": \"pause\"\n}"
+								},
+								"url": {
+									"raw": "{{server}}/api/projects/{{projectId}}/run_project",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"projects",
+										"{{projectId}}",
+										"run_project"
+									]
+								},
+								"description": ""
+							},
+							"status": "OK",
+							"code": 202,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"responseTime": "0",
+							"body": "{\n  \"projectId\": {{projectId}},\n  \"projectRunId\": {{projectRunId}},\n  \"status\": \"paused\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Stop Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-mock-response-code",
+								"value": "203",
+								"disabled": true
+							},
+							{
+								"key": "{x-api-key",
+								"value": "{{x-api-key}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"stop\"\n}"
+						},
+						"url": {
+							"raw": "{{server}}/api/projects/{{projectId}}/stop_project",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{projectId}}",
+								"stop_project"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "b6e684b7-5027-493d-89b0-3855ea986905",
+							"name": "Stop Project Example",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 203,
+							"_postman_previewlanguage": "",
+							"_postman_previewtype": "parsed",
+							"header": [],
+							"cookie": [],
+							"responseTime": 0,
+							"body": "{\n\t\"projectId\": {{projectId}},\n\t\"projectRunId\": {{projectRunId}},\n\t\"status\": \"stopped\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Project Run info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-mock-response-code",
+								"value": "250",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{x-api-key}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server}}/api/project_run/{{projectRunId}}",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"project_run",
+								"{{projectRunId}}"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "8b356d9b-9de3-4ce0-903a-60ed5679a5bd",
+							"name": "Stop Project Example",
+							"originalRequest": {
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"_postman_previewtype": "parsed",
+							"header": [],
+							"cookie": [],
+							"responseTime": 0,
+							"body": "{\n\t\"projectId\": {{projectId}},\n\t\"projectRunId\": {{projectRunId}},\n\t\"testRunsCount\": 3,\n\t\"testRunsStatus\": {\n\t\t\"queued\": 0,\n\t\t\"running\": 1,\n\t\t\"finished\": 1,\n\t\t\"failed\": 1\n\t},\n\t\"testRuns\": [\n\t\t  {\n\t\t    \"id\": \"454d20f163e5cdc8a51ab81cd4012c14\",\n\t\t    \"testId\": \"4ccfd8a02c87afc6185222b8e5138e2c\",\n\t\t    \"queueId\": \"Ola\",\n\t\t    \"runId\": \"Throughput_with_Mixed_Traffic_2017_6_16__0_9_11__6\",\n\t\t    \"status\": \"running\",\n\t\t    \"test\": {\n\t\t      \"id\": \"4ccfd8a02c87afc6185222b8e5138e2c\",\n\t\t      \"name\": \"Throughput with Mixed Traffic\",\n\t\t      \"type\": \"emix\"\n\t\t    },\n\t\t    \"createdAt\": \"2017-06-16T07:08:59.408Z\",\n\t\t    \"updatedAt\": \"2017-06-16T07:09:22.706Z\"\n\t\t  },\n\t\t  {\n\t\t    \"id\": \"bd82435c1b8fad8d385e59207507cfa5\",\n\t\t    \"testId\": \"76f8f4b30e434460786e961316cadfd4\",\n\t\t    \"queueId\": \"Ola\",\n\t\t    \"runId\": \"AA_02HTTP_1_0_Connections_per_Second_Test_2017_6_14__16_36_59__4\",\n\t\t    \"status\": \"finished\",\n\t\t    \"test\": {\n\t\t      \"id\": \"76f8f4b30e434460786e961316cadfd4\",\n\t\t      \"name\": \"AA_02HTTP 1.0 Connections per Second Test\",\n\t\t      \"type\": \"cps\"\n\t\t    },\n\t\t    \"createdAt\": \"2017-06-14T23:36:56.100Z\",\n\t\t    \"updatedAt\": \"2017-06-14T23:44:33.161Z\"\n\t\t  },\n\t\t  {\n\t\t    \"id\": \"2ec27e04ef05b48e9edb24c1f1ba8eff\",\n\t\t    \"testId\": \"2ec27e04ef05b48e9edb24c1f19b5b80\",\n\t\t    \"queueId\": \"Ola\",\n\t\t    \"runId\": \"AA_02HTTP_1_0_Connections_per_Second_Test_2017_6_15__23_51_58__5\",\n\t\t    \"status\": \"failed\",\n\t\t    \"message\": \"Cannot read property '1' of undefined\",\n\t\t    \"test\": {\n\t\t      \"id\": \"2ec27e04ef05b48e9edb24c1f1ba8eff\",\n\t\t      \"name\": \"AA_02HTTP 1.0 Connections per Second Test\",\n\t\t      \"type\": \"cps\"\n\t\t    },\n\t\t    \"createdAt\": \"2017-06-16T06:51:22.126Z\",\n\t\t    \"updatedAt\": \"2017-06-16T06:59:25.934Z\"\n\t\t  }\n\t]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Test Runner",
+			"description": "",
+			"item": [
+				{
+					"name": "Test list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"start\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2302/tests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2302",
+							"path": [
+								"tests"
+							]
+						},
+						"description": null
+					},
+					"response": [
+						{
+							"id": "6cdeafb4-4dc5-454c-bc83-e602eed469f6",
+							"name": "Test list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"action\": \"start\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2302/tests",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2302",
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "form-action 'self'; frame-ancestors 'self'; base-uri 'self'; default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; font-src 'self'; object-src 'none'; plugin-types application/pdf; child-src 'self'; frame-src 'self'; media-src 'self'",
+									"name": "Content-Security-Policy",
+									"description": "Custom header"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jan 2018 15:21:45 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"name": "X-Content-Type-Options",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY",
+									"name": "X-Frame-Options",
+									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block",
+									"name": "X-Xss-Protection",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 44,
+							"body": "[{\"id\":1,\"name\":\"CyberSecurity Assessment Perf Test\",\"description\":\"\",\"type\":\"csa\",\"created_at\":\"2018-01-18 18:32:46 UTC\",\"updated_at\":\"2018-01-18 18:32:46 UTC\"},{\"id\":2,\"name\":\"HTTP 1.0 Connections per Second Test\",\"description\":\"\",\"type\":\"cps\",\"created_at\":\"2018-01-18 18:33:01 UTC\",\"updated_at\":\"2018-01-18 18:33:01 UTC\"}]"
+						}
+					]
+				},
+				{
+					"name": "Test Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Test 4\",\n\t\"description\": \"\",\n\t\"type\": \"httpbandwidth\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2302/tests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2302",
+							"path": [
+								"tests"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "f538f791-fdc8-4525-b04e-c0e8f4734ffd",
+							"name": "Test Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"New test\",\n\t\"description\": \"Test description\",\n\t\"type\": \"httpbandwidth\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2302/tests",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2302",
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "form-action 'self'; frame-ancestors 'self'; base-uri 'self'; default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; font-src 'self'; object-src 'none'; plugin-types application/pdf; child-src 'self'; frame-src 'self'; media-src 'self'",
+									"name": "Content-Security-Policy",
+									"description": "Custom header"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Jan 2018 15:22:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"name": "X-Content-Type-Options",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY",
+									"name": "X-Frame-Options",
+									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block",
+									"name": "X-Xss-Protection",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 51,
+							"body": "{\"id\":3,\"name\":\"New test\",\"description\":\"Test description\",\"type\":\"httpbandwidth\",\"created_at\":\"2018-01-22 15:22:39 UTC\",\"updated_at\":\"2018-01-22 15:22:39 UTC\"}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
