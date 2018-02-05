@@ -12,7 +12,7 @@ conn.start
 
 ch  = conn.create_channel
 x   = ch.topic('amq.topic')
-q   = ch.queue('project_log')
+q = ch.queue('', :exclusive => true)
 
 ARGV.each do |severity|
   q.bind(x, :routing_key => severity)
@@ -21,7 +21,7 @@ end
 puts ' [*] Waiting for logs. To exit press CTRL+C'
 
 begin
-  q.subscribe(:block => true) do |delivery_info, properties, body|
+  q.subscribe(:block => true) do |delivery_info, _properties, body|
     puts " [x] #{delivery_info.routing_key}:#{body}"
   end
 rescue Interrupt => _

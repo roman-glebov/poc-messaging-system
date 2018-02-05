@@ -95,10 +95,16 @@ Inside `fake_cf_api` start the app server:
 bundle exec hanami server
 ```
 
-Inside `fake_test_runner` start the server:
+Inside `fake_project_runner` start the app server:
 
 ```text
 bundle exec hanami server -p 2301
+```
+
+Inside `fake_test_runner` start the server:
+
+```text
+bundle exec hanami server -p 2302
 ```
 
 Import file `postman_collection.json` to you Postman.
@@ -130,21 +136,11 @@ Then add `Project` with test ids were created previously:
 }
 ```
 
-Start all listeners:
-
-```text
-cd fake_cf_api
-WORKERS=ProjectRunUpdateListener bundle exec rake sneakers:run
-```
-
-```text
-cd fake_project_runner
-WORKERS=ProjectRunStartListener,ProjectRunUpdaterListener,TestRunUpdaterListener bundle exec rake sneakers:run
-```
+Start test runner background job listener:
 
 ```text
 cd fake_test_runner
-WORKERS=TestRunWorker,TestRunStartListener bundle exec rake sneakers:run
+WORKERS=TestRunWorker bundle exec rake sneakers:run
 ```
 
 Start log script `receive_logs_topic.rb` in the top folder:
